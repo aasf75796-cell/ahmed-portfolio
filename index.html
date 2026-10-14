@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #3b82f6;
+      --light-blue: #60a5fa;
+      --bg: #070b14;
+      --card: #101827;
+      --white: #f8fafc;
+      --muted: #aab8cc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Animated background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 20%, #155eef55, transparent 30%),
+        radial-gradient(circle at 85% 35%, #3b82f633, transparent 28%),
+        radial-gradient(circle at 50% 90%, #ffffff12, transparent 30%);
+      animation: backgroundMove 12s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .12;
+      background-image:
+        linear-gradient(#ffffff12 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff12 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+
+    @keyframes backgroundMove {
+      from { transform: translate(-1%, 0) scale(1); }
+      to { transform: translate(1%, 2%) scale(1.08); }
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #070b14e8;
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid #ffffff18;
+      padding: 16px 0;
+    }
+
+    .navbar-brand {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .navbar-brand span,
+    .accent {
+      color: var(--light-blue);
+    }
+
+    .nav-link {
+      color: #dbeafe;
+      margin-left: 12px;
+      transition: .3s;
+    }
+
+    .nav-link:hover {
+      color: var(--light-blue);
+    }
+
+    .navbar-toggler {
+      border-color: #ffffff55;
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* General */
+    section {
+      padding: 100px 0;
+    }
+
+    .accent {
+      text-shadow: 0 0 25px #3b82f688;
+    }
+
+    .kicker {
+      color: var(--light-blue);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      margin: 12px 0;
+    }
+
+    .sub {
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-top: 25px;
+      max-width: 600px;
+    }
+
+    .btn-custom {
+      display: inline-block;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: .3s;
+      margin: 8px 8px 8px 0;
+    }
+
+    .btn-blue {
+      color: white;
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      box-shadow: 0 8px 30px #2563eb55;
+    }
+
+    .btn-blue:hover {
+      color: white;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px #2563eb88;
+    }
+
+    .btn-outline {
+      color: #93c5fd;
+      border: 1px solid #60a5fa;
+    }
+
+    .btn-outline:hover {
+      color: white;
+      background: #2563eb;
+      transform: translateY(-4px);
+    }
+
+    .portrait {
+      width: min(340px, 85%);
+      aspect-ratio: 4 / 4.6;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 45% 45% 25px 25px;
+      border: 2px solid #60a5fa88;
+      background: linear-gradient(135deg, #1d4ed8, #111827);
+      box-shadow: 0 0 35px #2563eb44, 0 25px 80px #0007;
+      animation: floatPhoto 5s ease-in-out infinite;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes floatPhoto {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .social {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .social a {
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      border: 1px solid #ffffff25;
+      border-radius: 13px;
+      color: white;
+      background: #101827;
+      font-size: 1.2rem;
+      transition: .3s;
+    }
+
+    .social a:hover {
+      color: white;
+      background: #2563eb;
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px #3b82f677;
+    }
+
+    /* Cards */
+    .dark-section {
+      background: #0b1220bb;
+      border-top: 1px solid #ffffff0c;
+      border-bottom: 1px solid #ffffff0c;
+    }
+
+    .card-custom {
+      height: 100%;
+      padding: 28px;
+      background: linear-gradient(145deg, #121d30, #0b1220);
+      border: 1px solid #ffffff15;
+      border-radius: 20px;
+      transition: .35s;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-9px);
+      border-color: #60a5fa99;
+      box-shadow: 0 20px 45px #2563eb22;
+    }
+
+    .card-icon {
+      display: grid;
+      place-items: center;
+      width: 55px;
+      height: 55px;
+      margin-bottom: 20px;
+      color: var(--light-blue);
+      background: #2563eb25;
+      border: 1px solid #3b82f644;
+      border-radius: 15px;
+      font-size: 1.5rem;
+    }
+
+    .card-custom h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card-custom p {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.9;
+      margin-bottom: 0;
+    }
+
+    /* Skills */
+    .skill {
+      display: inline-block;
+      margin: 5px 4px 5px 0;
+      padding: 9px 13px;
+      background: #0b1424;
+      border: 1px solid #ffffff18;
+      border-radius: 10px;
+      color: #dbeafe;
+      font-size: .85rem;
+      transition: .3s;
+    }
+
+    .skill:hover {
+      background: #2563eb;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Projects */
+    .project-card {
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(145deg, #121d30, #0b1220);
+      border: 1px solid #ffffff18;
+      border-radius: 20px;
+      transition: .35s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-9px);
+      border-color: #60a5fa99;
+      box-shadow: 0 20px 50px #2563eb25;
+    }
+
+    .project-art {
+      height: 175px;
+      display: grid;
+      place-items: center;
+      font-size: 3.5rem;
+      color: white;
+      background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-art::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 50%;
+      height: 200%;
+      transform: rotate(25deg);
+      background: linear-gradient(90deg, transparent, #ffffff55, transparent);
+      transition: .7s;
+    }
+
+    .project-card:hover .project-art::after {
+      left: 150%;
+    }
+
+    .project-body {
+      padding: 25px;
+    }
+
+    .project-body p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: .9rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 9px;
+      margin: 3px;
+      background: #ffffff12;
+      color: #bfdbfe;
+      border-radius: 7px;
+      font-size: .75rem;
+    }
+
+    /* Contact */
+    .contact-panel {
+      padding: clamp(28px, 5vw, 55px);
+      border: 1px solid #60a5fa55;
+      border-radius: 25px;
+      background:
+        radial-gradient(circle at 100% 0%, #60a5fa33, transparent 40%),
+        linear-gradient(135deg, #102a56, #080e19);
+      box-shadow: 0 20px 65px #0005;
+    }
+
+    .contact-panel p {
+      color: #cbd5e1;
+      line-height: 1.9;
+    }
+
+    .contact-link {
+      display: block;
+      padding: 13px 0;
+      color: white;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-link i {
+      color: var(--light-blue);
+      margin-right: 10px;
+    }
+
+    .contact-link:hover {
+      color: var(--light-blue);
+    }
+
+    footer {
+      padding: 25px 0;
+      border-top: 1px solid #ffffff15;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* WhatsApp floating button */
+    .whatsapp {
+      position: fixed;
+      left: 22px;
+      bottom: 22px;
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border: 2px solid white;
+      border-radius: 50%;
+      background: #25d366;
+      color: white;
+      font-size: 2rem;
+      z-index: 9999;
+      animation: pulse 2s infinite;
+      transition: .3s;
+    }
+
+    .whatsapp:hover {
+      color: white;
+      background: #128c7e;
+      transform: scale(1.1);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 #25d36666; }
+      50% { box-shadow: 0 0 0 12px #25d36600; }
+    }
+
+    /* Back to top */
+    .top-btn {
+      position: fixed;
+      right: 22px;
+      bottom: 25px;
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: #2563eb;
+      border-radius: 13px;
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s;
+      z-index: 999;
+    }
+
+    .top-btn.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .top-btn:hover {
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 70px 0; }
+      .hero { text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .social { justify-content: center; }
+      .portrait { margin-top: 35px; }
+      .nav-link { margin-left: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">Ahmed<span>.</span></a>
+
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+        aria-label="Open navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7 reveal">
+            <span class="kicker">Welcome to my portfolio</span>
+            <h1 class="mt-4">
+              Hi, I'm Ahmed.<br>
+              <span class="accent">I build for the web.</span>
+            </h1>
+
+            <p>
+              I'm passionate about creating clean, responsive, and
+              user-friendly websites. Explore my skills and projects,
+              and feel free to get in touch.
+            </p>
+
+            <div class="mt-4">
+              <a href="#projects" class="btn-custom btn-blue">
+                Explore My Work <i class="bi bi-arrow-up-right"></i>
+              </a>
+              <a href="#contact" class="btn-custom btn-outline">
+                Let's Talk <i class="bi bi-chat-dots"></i>
+              </a>
+            </div>
+
+            <div class="social">
+              <a href="https://github.com/aasf75796-cell" target="_blank" aria-label="GitHub">
+                <i class="bi bi-github"></i>
+              </a>
+              <a href="mailto:aasf75796@gmail.com" aria-label="Email">
+                <i class="bi bi-envelope"></i>
+              </a>
+              <a href="https://wa.me/201069759678" target="_blank" aria-label="WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-5 reveal">
+            <div class="portrait">
+              <img src="assets/img/emj.jpg"
+                   alt="Ahmed's profile photo"
+                   onerror="this.style.display='none'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="dark-section" id="about">
+      <div class="container">
+        <div class="text-center mb-5 reveal">
+          <span class="kicker">A little about me</span>
+          <h2 class="section-title">Building for the <span class="accent">digital world.</span></h2>
+          <p class="sub mx-auto" style="max-width:700px">
+            I enjoy turning ideas into simple, attractive web experiences.
+            My focus is on responsive pages, clean layouts, and details
+            that make websites pleasant to use.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <div class="card-custom">
+              <div class="card-icon"><i class="bi bi-window"></i></div>
+              <h3>Web Experiences</h3>
+              <p>Creating organized interfaces that look good on desktop, tablet, and mobile.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4 reveal">
+            <div class="card-custom">
+              <div class="card-icon"><i class="bi bi-lightning-charge"></i></div>
+              <h3>Clean & Practical</h3>
+              <p>Writing structured code and focusing on details that make websites easier to use.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4 reveal">
+            <div class="card-custom">
+              <div class="card-icon"><i class="bi bi-graph-up-arrow"></i></div>
+              <h3>Always Learning</h3>
+              <p>Improving my skills and learning better ways to build modern web projects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="container">
+        <div class="text-center mb-5 reveal">
+          <span class="kicker">What I work with</span>
+          <h2 class="section-title">My <span class="accent">Skills</span></h2>
+          <p class="sub">My toolkit for building modern websites.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <div class="card-custom">
+              <div class="card-icon"><i class="bi bi-code-slash"></i></div>
+              <h3>Frontend</h3>
+              <span class="skill">HTML5</span>
+              <span class="skill">CSS3</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">Bootstrap</span>
+            </div>
+          </div>
+
+          <div class="col-md-4 reveal">
+            <div class="card-custom">
+              <div class="card-icon"><i class="bi bi-palette"></i></div>
+              <h3>Design</h3>
+              <span class="skill">Responsive UI</span>
+              <span class="skill">Layouts</span>
+              <span class="skill">Animations</span>
+              <span class="skill">Accessibility</span>
+            </div>
+          </div>
+
+          <div class="col-md-4 reveal">
+            <div class="card-custom">
+              <div class="card-icon"><i class="bi bi-tools"></i></div>
+              <h3>Tools</h3>
+              <span class="skill">Git</span>
+              <span class="skill">GitHub</span>
+              <span class="skill">VS Code</span>
+              <span class="skill">Debugging</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="dark-section" id="projects">
+      <div class="container">
+        <div class="text-center mb-5 reveal">
+          <span class="kicker">Selected work</span>
+          <h2 class="section-title">My <span class="accent">Projects</span></h2>
+          <p class="sub">Some project ideas you can replace with your own work.</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="project-card">
+              <div class="project-art"><i class="bi bi-window-stack"></i></div>
+              <div class="project-body">
+                <h3>Personal Portfolio</h3>
+                <p>A personal website to introduce yourself and showcase your work.</p>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Bootstrap</span>
+                <a class="d-block mt-3 accent" href="https://github.com/aasf75796-cell" target="_blank">
+                  View on GitHub <i class="bi bi-arrow-up-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="project-card">
+              <div class="project-art"><i class="bi bi-check2-square"></i></div>
+              <div class="project-body">
+                <h3>Task Manager</h3>
+                <p>A simple interface concept for organizing daily tasks and activities.</p>
+                <span class="tag">JavaScript</span>
+                <span class="tag">UI Design</span>
+                <a class="d-block mt-3 accent" href="https://github.com/aasf75796-cell" target="_blank">
+                  View on GitHub <i class="bi bi-arrow-up-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 reveal">
+            <div class="project-card">
+              <div class="project-art"><i class="bi bi-shop"></i></div>
+              <div class="project-body">
+                <h3>Landing Page</h3>
+                <p>A modern landing page with a clear layout and attractive design.</p>
+                <span class="tag">Bootstrap</span>
+                <span class="tag">CSS</span>
+                <a class="d-block mt-3 accent" href="https://github.com/aasf75796-cell" target="_blank">
+                  View on GitHub <i class="bi bi-arrow-up-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+              <span class="kicker">Get in touch</span>
+              <h2 class="section-title">Have a project in mind?</h2>
+              <p>
+                I'm happy to hear about opportunities, collaborations,
+                or new projects. Send me a message and let's talk.
+              </p>
+              <a href="mailto:aasf75796@gmail.com" class="btn-custom btn-blue">
+                Send Me an Email <i class="bi bi-arrow-up-right"></i>
+              </a>
+            </div>
+
+            <div class="col-lg-5">
+              <a class="contact-link" href="mailto:aasf75796@gmail.com">
+                <i class="bi bi-envelope"></i> aasf75796@gmail.com
+              </a>
+              <a class="contact-link" href="https://wa.me/201069759678" target="_blank">
+                <i class="bi bi-whatsapp"></i> 01069759678
+              </a>
+              <a class="contact-link" href="https://github.com/aasf75796-cell" target="_blank">
+                <i class="bi bi-github"></i> GitHub Profile
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <a class="navbar-brand" href="#home">Ahmed<span>.</span></a>
+      <p class="mt-2 mb-0">© <span id="year"></span> Ahmed. Built with care.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/201069759678"
+     class="whatsapp"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Contact me on WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+  </a>
+
+  <!-- Back to top -->
+  <a href="#home" class="top-btn" id="topBtn" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Back-to-top button
+    const topBtn = document.getElementById("topBtn");
+
+    window.addEventListener("scroll", () => {
+      topBtn.classList.toggle("show", window.scrollY > 400);
+    });
+
+    // Reveal elements when scrolling
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add("visible"));
+    }
+
+    // Close mobile menu after clicking a link
+    document.querySelectorAll("#navbarMenu .nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        const menu = document.getElementById("navbarMenu");
+
+        if (menu.classList.contains("show")) {
+          bootstrap.Collapse.getOrCreateInstance(menu).hide();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
